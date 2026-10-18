@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sentix ERP - Enterprise Social Text Media Analytics & ITPM Control Center">
+    <title>Sentix Enterprise - Social Text Analytics & ITPM Suite</title>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js Library via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Animated Splash Screen Loading Overlay -->
+    <div id="splashScreen">
+        <div class="splash-logo-box">
+            <div class="splash-icon">
+                <i class="fa-solid fa-brain"></i>
+            </div>
+            <div>
+                <div class="splash-title">Sentix ERP</div>
+                <div class="splash-sub">Enterprise Social AI & ITPM Control Center</div>
+            </div>
+        </div>
+        <div class="splash-loader-bar">
+            <div class="splash-loader-fill" id="splashFill"></div>
+        </div>
+        <div class="splash-status" id="splashStatus">Initializing VADER NLP Lexicon & Indian FinTech Dataset...</div>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="brand-logo">
+            <div class="brand-icon">
+                <i class="fa-solid fa-brain"></i>
+            </div>
+            <div>
+                <div class="brand-title">Sentix ERP</div>
+                <div style="font-size: 0.7rem; color: var(--text-muted);">Enterprise & ITPM Portal</div>
+            </div>
+        </div>
+
+        <ul class="nav-menu">
+            <li class="nav-item active" data-tab="tab-overview">
+                <i class="fa-solid fa-chart-pie"></i> Executive Overview
+            </li>
+            <li class="nav-item" data-tab="tab-social">
+                <i class="fa-solid fa-comments"></i> Social Text Analysis
+            </li>
+            <li class="nav-item" data-tab="tab-enterprise">
+                <i class="fa-solid fa-network-wired"></i> Enterprise System
+            </li>
+            <li class="nav-item" data-tab="tab-itpm">
+                <i class="fa-solid fa-diagram-project"></i> ITPM Project Suite
+            </li>
+        </ul>
+
+        <div class="role-badge-box">
+            <div class="role-label">Active System Role</div>
+            <select id="roleSelector" class="role-select">
+                <option value="Executive">Executive Suite</option>
+                <option value="Social Analyst">Social Media Analyst</option>
+                <option value="IT Project Manager">IT Project Manager</option>
+                <option value="System Admin">System Administrator</option>
+            </select>
+        </div>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-title-box">
+                <h1 id="pageTitle">Executive Overview Dashboard</h1>
+                <p id="pageSubTitle">Unified Brand Sentiment Analysis & IT Project Performance Metrics</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-outline" id="btnExportCSV">
+                    <i class="fa-solid fa-file-csv"></i> Export CSV
+                </button>
+                <button class="btn btn-primary" id="btnExportJSON">
+                    <i class="fa-solid fa-download"></i> Export Data (JSON)
+                </button>
+            </div>
+        </header>
+
+        <!-- Dynamic Content Body -->
+        <main class="content-area">
+
+            <!-- TAB 1: EXECUTIVE OVERVIEW -->
+            <section id="tab-overview" class="tab-content active">
+                <div class="teacher-guide-banner">
+                    <div>
+                        <i class="fa-solid fa-lightbulb" style="color: var(--warning-color); margin-right: 0.4rem;"></i>
+                        <strong>Script Summary:</strong> This dashboard provides corporate executives with live KPIs on brand customer sentiment, total social feeds analyzed, and IT project performance metrics in Indian Rupees (INR ₹).
+                    </div>
+                </div>
+
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Net Brand Sentiment Score</span>
+                            <div class="kpi-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">
+                                <i class="fa-solid fa-face-smile"></i>
+                            </div>
+                        </div>
+                        <div class="kpi-value" id="kpiNetSentiment">+0.42</div>
+                        <div class="kpi-subtext" style="color: var(--success-color);">
+                            <i class="fa-solid fa-arrow-trend-up"></i> +8.4% vs last week
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Social Text Posts Analyzed</span>
+                            <div class="kpi-icon" style="background: rgba(99, 102, 241, 0.15); color: #6366f1;">
+                                <i class="fa-solid fa-comment-dots"></i>
+                            </div>
+                        </div>
+                        <div class="kpi-value" id="kpiTotalPosts">14,890</div>
+                        <div class="kpi-subtext">Multichannel Indian Streams</div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">IT Performance Index (CPI / SPI)</span>
+                            <div class="kpi-icon" style="background: rgba(6, 182, 212, 0.15); color: #06b6d4;">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                        </div>
+                        <div class="kpi-value" id="kpiCPI">1.13 / 1.08</div>
+                        <div class="kpi-subtext" style="color: var(--success-color);">
+                            <i class="fa-solid fa-check"></i> Under Budget & Ahead Schedule
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Escalated IT Tickets</span>
+                            <div class="kpi-icon" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </div>
+                        </div>
+                        <div class="kpi-value" id="kpiTotalTickets">3</div>
+                        <div class="kpi-subtext" style="color: var(--warning-color);">Auto-generated from Negative Sentiment</div>
+                    </div>
+                </div>
+
+                <div class="card-grid">
+                    <div class="card col-8">
+                        <div class="card-title-box">
+                            <div class="card-title"><i class="fa-solid fa-chart-area"></i> Sentiment Volume & Weekly Timeline</div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="overviewTrendChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card col-4">
+                        <div class="card-title-box">
+                            <div class="card-title"><i class="fa-solid fa-chart-doughnut"></i> Sentiment Polarity Distribution</div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="sentimentDistributionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: SOCIAL TEXT MEDIA ANALYSIS MODULE -->
+            <section id="tab-social" class="tab-content">
+                <div class="teacher-guide-banner">
+                    <div>
+                        <i class="fa-solid fa-lightbulb" style="color: var(--warning-color); margin-right: 0.4rem;"></i>
+                        <strong>Script Summary:</strong> Advanced Natural Language Processing (NLP) module using VADER compound sentiment scoring, aspect classification (UI/UX, UPI, Billing), and emotion vectoring.
+                    </div>
+                </div>
+
+                <div class="card-grid">
+                    <!-- Live Sentiment Sandbox Classifier -->
+                    <div class="card col-6">
+                        <div class="card-title-box">
+                            <div class="card-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Live Text Sentiment Sandbox</div>
+                            <span class="badge badge-neutral">VADER NLP Engine</span>
+                        </div>
+                        <div class="classifier-box">
+                            <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                                Test real-time text analysis on any post (Indian social terms included):
+                            </p>
+                            <textarea id="sandboxInput" class="text-area-custom" placeholder="Try typing: 'UPI payment timed out on Flipkart sale, money deducted from HDFC account! Extremely bad service, refund immediately!'"></textarea>
+                            <button class="btn btn-primary" id="btnAnalyzeText">
+                                <i class="fa-solid fa-bolt"></i> Run Advanced Text Analysis
+                            </button>
+
+                            <div class="result-card" id="sandboxResultCard" style="display: none;">
+                                <div class="result-header">
+                                    <span style="font-weight: 600;">Sentiment Result:</span>
+                                    <span id="resBadge" class="badge">Positive</span>
+                                </div>
+                                <div style="display: flex; gap: 1.5rem; font-size: 0.88rem;">
+                                    <div>Compound Score: <strong id="resScore" style="color: var(--accent-cyan);">+0.00</strong></div>
+                                    <div>Detected Aspect: <strong id="resAspect" style="color: #ffffff;">General</strong></div>
+                                </div>
+
+                                <div class="emotion-bar-container">
+                                    <div class="emotion-bar-item">
+                                        <span>Frustration / Anger:</span>
+                                        <div class="progress-bg"><div class="progress-fill" id="emoFrustration" style="width: 0%;"></div></div>
+                                    </div>
+                                    <div class="emotion-bar-item">
+                                        <span>Urgency Score:</span>
+                                        <div class="progress-bg"><div class="progress-fill" id="emoUrgency" style="width: 0%;"></div></div>
+                                    </div>
+                                    <div class="emotion-bar-item">
+                                        <span>Joy & Delight:</span>
+                                        <div class="progress-bg"><div class="progress-fill" id="emoJoy" style="width: 0%;"></div></div>
+                                    </div>
+                                </div>
+                                
+                                <div id="autoTicketSuggestion" style="font-size: 0.8rem; color: var(--warning-color); display: none; margin-top: 0.5rem;">
+                                    <i class="fa-solid fa-circle-exclamation"></i> Negative sentiment detected! Auto-escalation recommendation triggered.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aspect Based Breakdown -->
+                    <div class="card col-6">
+                        <div class="card-title-box">
+                            <div class="card-title"><i class="fa-solid fa-layer-group"></i> Aspect-Based Sentiment Analysis (ABSA)</div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="aspectChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Live Multichannel Social Stream Feed -->
+                    <div class="card col-12">
+                        <div class="card-title-box">
+                            <div class="card-title"><i class="fa-solid fa-rss"></i> Multichannel Social Media Feed & Escalation Pipeline</div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="custom-table">
+                                <thead>
+                                    <tr>
+                                        <th>Post ID</th>
+                                        <th>Platform</th>
+                                        <th>User</th>
+                                        <th>Post Content</th>
+                                        <th>Aspect</th>
+                                        <th>Score</th>
+                                        <th>Sentiment</th>
+                                        <th>Enterprise Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="socialFeedTableBody">
+                                    <!-- Dynamic Rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: ENTERPRISE SYSTEM (ES) MODULE -->
+            <section id="tab-enterprise" class="tab-content">
+                <div class="teacher-guide-banner">
+                    <div>
+                        <i class="fa-solid fa-lightbulb" style="color: var(--warning-color); margin-right: 0.4rem;"></i>
+                        <strong>Script Summary:</strong> Enterprise System (ES) integration module. Negative social posts automatically create P1/P2 IT support tickets with verifiable audit trails and JSON/CSV REST data export.
+                    </div>
+                </div>
+
+                <div class="card-grid">
+                    <div class="card col-8">
+                        <div class="card-title-box">
+                            <div class="card-title"><i class="fa-solid fa-ticket"></i> Enterprise Incident Ticket Pipeline</div>
+                            <span class="badge badge-neutral">Auto-Escalated from Social Media</span>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="custom-table">
+                                <thead>
+                                    <tr>
+                                        <th>Ticket ID</th>
+                                        <th>Title & Aspect</th>
+                                        <th>Priority</th>
+                                        <th>Assignee</th>
+                                        <th>Status</th>
+                                        <th>Source Post</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ticketsTableBody">
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card col-4">
+                        <div class="card-title-box">
+                            <div class="card-title"><i class="fa-solid fa-shield-halved"></i> Enterprise Audit & Security Log</div>
+                        </div>
+                        <div style="font-size: 0.8rem; font-family: monospace; max-height: 280px; overflow-y: auto;" id="auditLogBox">
+                            <!-- Logs populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: ITPM PROJECT SUITE -->
+            <section id="tab-itpm" class="tab-content">
+                <div class="teacher-guide-banner">
+                    <div>
+                        <i class="fa-solid fa-lightbulb" style="color: var(--warning-color); margin-right: 0.4rem;"></i>
+                        <strong>Script Summary:</strong> Information Technology Project Management (ITPM) control suite featuring live Earned Value Management (EVM ₹) calculations, Gantt WBS timelines, 5x5 Risk Matrices, and Agile Kanban boards.
+                    </div>
+                </div>
+
+                <div class="card-grid">
+                    <!-- EVM Calculator in INR (₹) -->
+                    <div class="card col-12">
+                        <div class="card-title-box">
+                            <div class="card-title"><i class="fa-solid fa-calculator"></i> Earned Value Management (EVM) Control Panel (INR ₹)</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 1.5rem;">
+                            <div>
+                                <label style="font-size: 0.8rem; color: var(--text-secondary);">Planned Value (PV ₹)</label>
+                                <input type="number" id="inputPV" class="text-area-custom" style="min-height: 40px; margin-top: 0.3rem;" value="650000">
+                            </div>
+                            <div>
+                                <label style="font-size: 0.8rem; color: var(--text-secondary);">Earned Value (EV ₹)</label>
+                                <input type="number" id="inputEV" class="text-area-custom" style="min-height: 40px; margin-top: 0.3rem;" value="700000">
+                            </div>
+                            <div>
+                                <label style="font-size: 0.8rem; color: var(--text-secondary);">Actual Cost (AC ₹)</label>
+                                <input type="number" id="inputAC" class="text-area-custom" style="min-height: 40px; margin-top: 0.3rem;" value="620000">
+                            </div>
+                            <div>
+                                <label style="font-size: 0.8rem; color: var(--text-secondary);">Budget at Completion (BAC ₹)</label>
+                                <input type="number" id="inputBAC" class="text-area-custom" style="min-height: 40px; margin-top: 0.3rem;" value="1200000">
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 2rem; background: var(--bg-tertiary); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--card-border); flex-wrap: wrap;">
+                            <div>Cost Variance (CV): <strong id="evmCV" style="color: var(--success-color);">+₹80,000</strong></div>
+                            <div>Schedule Variance (SV): <strong id="evmSV" style="color: var(--success-color);">+₹50,000</strong></div>
+                            <div>CPI Index: <strong id="evmCPI" style="color: var(--accent-cyan);">1.13</strong></div>
+                            <div>SPI Index: <strong id="evmSPI" style="color: var(--accent-cyan);">1.08</strong></div>
+                            <div>Est. at Completion (EAC): <strong id="evmEAC" style="color: #ffffff;">₹10,61,947</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- Gantt Schedule -->
+                    <div class="card col-7">
+                        <div class="card-title-box">
+                            <div class="card-title"><i class="fa-solid fa-timeline"></i> Interactive Project Gantt Schedule & WBS</div>
+                        </div>
+                        <div id="ganttContainer">
+                            <!-- Gantt tasks populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- 5x5 Risk Matrix -->
+                    <div class="card col-5">
+                        <div class="card-title-box">
+                            <div class="card-title"><i class="fa-solid fa-circle-nodes"></i> Project Risk Register & Matrix</div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="custom-table" style="font-size: 0.8rem;">
+                                <thead>
+                                    <tr>
+                                        <th>Risk ID</th>
+                                        <th>Description</th>
+                                        <th>P x I</th>
+                                        <th>Mitigation</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="riskTableBody">
+                                    <!-- Risks populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Agile Kanban Board -->
+                    <div class="card col-12">
+                        <div class="card-title-box">
+                            <div class="card-title"><i class="fa-solid fa-list-check"></i> Agile Incident Task Kanban Board</div>
+                        </div>
+                        <div class="kanban-grid">
+                            <div class="kanban-col">
+                                <div class="kanban-col-title">Backlog <span class="badge badge-neutral" id="kanbanBacklogCount">1</span></div>
+                                <div id="kanbanBacklog"></div>
+                            </div>
+                            <div class="kanban-col">
+                                <div class="kanban-col-title">In Progress <span class="badge badge-neutral" id="kanbanProgressCount">1</span></div>
+                                <div id="kanbanInProgress"></div>
+                            </div>
+                            <div class="kanban-col">
+                                <div class="kanban-col-title">QA / Review <span class="badge badge-neutral" id="kanbanQACount">1</span></div>
+                                <div id="kanbanQA"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Application Controllers -->
+    <script src="js/mockData.js"></script>
+    <script src="js/sentimentEngine.js"></script>
+    <script src="js/enterpriseEngine.js"></script>
+    <script src="js/itpmEngine.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
