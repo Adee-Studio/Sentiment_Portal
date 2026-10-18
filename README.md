@@ -40,11 +40,4 @@ Then open `http://localhost:8000` in your browser.
 
 ---
 
-## 📄 Submitting to Your Professor / Evaluator
 
-1. **Working Code & App Presentation:** Launch the app using `run_app.bat` and demonstrate live text classification in the **Social Text Analysis** tab!
-2. **Project Report Document:** The repository includes a full, submission-ready project report in [`PROJECT_REPORT.md`](file:///c:/Users/adish/OneDrive/Desktop/Sentiment_Portal/PROJECT_REPORT.md).
-3. **Printable / Export View:** Click the **Academic Project Report** tab in the web application and click **Print / Save Report as PDF**.
-
----
-*Created for 1-Day Accelerated Semester Project Submission.*
